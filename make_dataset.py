@@ -6,19 +6,22 @@ from scipy.stats import zscore
 import requests
 import zipfile
 import io
+# from pathlib import Path
 
 # IDs to download the human brain data from Allen API
-well_know_file_IDS = [178238387, 178238373, 178238359, 178238316, 178238266,
+well_known_file_IDs = [178238387, 178238373, 178238359, 178238316, 178238266,
                       178236545]
 
+# raw data pathlib
+raw_data_location = './data/raw'
 
-def download_HBA_adult_human_data(file_id):
+
+def download_HBA_adult_human_data(file_id, path):
     url = 'http://api.brain-map.org/api/v2/'
     url += 'well_known_file_download/{}'.format(file_id)
     r = requests.get(url)
     z = zipfile.ZipFile(io.BytesIO(r.content))
-    # should make sure to find right location to save extracted data
-    return z.extractall()
+    return z.extractall(path)
 
 
 def read_expression_file(file_name):
@@ -43,8 +46,7 @@ def get_probes_data(probes_file, reannotate=False):
                                   'probeset_id': 'probe_id'}, inplace=True)
 
     if reannotate:
-        reannotations = get_probe_reannotations('./data/raw/ \
-            gene_symbol_annotations/AllenInstitute_custom_Agilent_Array.txt')
+        reannotations = get_probe_reannotations('./data/raw/gene_symbol_annotations/AllenInstitute_custom_Agilent_Array.txt')
         probes_df = merge_reannotations(probes_df, reannotations)
 
     probes_df.set_index('probe_id', inplace=True)
@@ -185,7 +187,7 @@ def get_single_donor_tidy_df(exp_df, samples_df, probes_df, donor_id, reannotate
     return melted
 
 
-def make_HBA_dataset(reannotate=False):
+def get_HBA_dataset(reannotate=False):
     if reannotate:
         HBA_data_out_path = './data/processed/brainarea_vs_genes_exp_w_reannotations.tsv'
     else:
@@ -198,11 +200,11 @@ def make_HBA_dataset(reannotate=False):
                                                  sep='\t')
 
     else:
+        os.makedirs('./data/processed', exist_ok=True)
         data_path = './data/raw/allen_HBA'
         hba_donor_folders = glob.glob(os.path.join(data_path, '*'))
 
         all_donors = []
-
         for donor_folder in hba_donor_folders:
             donor_id = donor_folder.split('/')[-1].split('_')[-1]
             donor_files = glob.glob(os.path.join(donor_folder, '*'))
@@ -225,7 +227,7 @@ def make_HBA_dataset(reannotate=False):
     return structure_genes_exp_matrix
 
 
-def make_fetal_HBA_dataset(reannotate=False):
+def get_fetal_HBA_dataset(reannotate=False):
     if reannotate:
         fetal_data_out_path = './data/processed/fetal_brainarea_vs_genes_exp_w_reannotations.tsv'
     else:
@@ -240,6 +242,7 @@ def make_fetal_HBA_dataset(reannotate=False):
                                                  sep='\t')
 
     else:
+        os.makedirs('./data/processed', exist_ok=True)
         raw_fetal_data_path = './data/raw/allen_human_fetal_brain'
         fetal_donor_folders = glob.glob(os.path.join(raw_fetal_data_path, '*'))
 

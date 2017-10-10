@@ -20,7 +20,10 @@ This tool will further analyses and help answer questions such as:
 - Do the above answers agree in mouse, monkey and human brain?
 
 
-## How can I get involved?
-
-
 ## Data
+To start with, you can download the [normalized microarray datasets](http://human.brain-map.org/static/download) of gene expression from 6 adult human brains that was released by the Allen Brain Atlas. Place the raw data in /HBAsets/data/raw/ and you can run the make_dataset.py preprocessing script to generate the processed expression matrix which will be used for analysis.
+
+Alternatively, if you would like to go straight to the analysis steps download the preprocessed data from GDrive [here](https://drive.google.com/drive/folders/0BzB3t6aSc9bDdDc2MEU3MjROY0E?usp=sharing) and place the files directly in /HBAsets/data/processed
+
+
+## How can I get involved?
