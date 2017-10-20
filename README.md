@@ -8,7 +8,7 @@ Brain diseases are often due to variations in multiple genes (polygenic disorder
 
 There is a growing amount of open data describing gene expression in the brain. For example, the [Allen Brain Atlas](http://www.brain-map.org/) provides a number of highly comprehensive brain atlases in the human, mouse and monkey. However, these valuable resources are underused for the analysis of polygenic brain disorders because the data is not easily accessible beyond the level of a single gene.
 
-This tool aims to make use of the substantial open data of gene expression in the brain to to facilitate accessible, rapid and custom data mining of open brain transcriptome data (across time, anatomy, species and celltypes).
+This tool aims to make use of the substantial open data of gene expression in the brain to facilitate accessible, rapid and custom data mining of open brain transcriptome data (across time, anatomy, species and celltypes).
 
 ## Who is this for?
 Many scientific studies produce lists of genes that are differentially expressed in a brain disease or where genetic variants are associated with a mental illness. Often, these gene sets are derived from unbiased genome-wide studies and may not have been previously characterized.
@@ -27,3 +27,4 @@ Alternatively, if you would like to go straight to the analysis steps download t
 
 
 ## How can I get involved?
+HBAsets is openly developed and welcomes contributors. Check out the [Roadmap](https://github.com/derekhoward/HBAsets/wiki) and the [contributing guidelines](CONTRIBUTING.MD) to get an idea of how to start. Your thoughts, questions, bugs, suggestions, etc are valuable to us so feel free to take part in discussion in the [issues](https://github.com/derekhoward/HBAsets/issues).
